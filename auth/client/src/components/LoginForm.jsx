@@ -51,31 +51,34 @@ export default function LoginForm() {
     };
 
     return(
-        <div className="login size-[40%] mx-auto p-5 border-2 rounded-lg">            
-            <form onSubmit={signupHandelSubmit} className="flex flex-col justify-center gap-2">
-                <h2>SignUp</h2>
-                <input value={signupEmail} onChange={(e) => {
-                    setSignupEmail(e.target.value)
-                }} className="border-2 rounded-md" type="email" name="singnupName" id="singnupName" placeholder="email" autoComplete="email" required/>
-                <input value={signupPassword} onChange={(e) => {
-                    setSignupPassword(e.target.value)
-                }} className="border-2 rounded-md" type="password" name="signupPassword" id="signupPassword" placeholder="password" autoComplete="new-password" required />
-                <input value={signupMobileNo} onChange={(e) => {
-                    setSignupMobileNo(e.target.value)
-                }} className="border-2 rounded-md" type="text" name="signupContact" id="signupContact" placeholder="contact no" required />
-                <button>SignUp</button>
-            </form>
+        <div className=" flex justify-center items-center h-screen">
+            <div className="flex flex-wrap flex-col border-black border-2 w-fit rounded-2xl h-fit">            
+                <form onSubmit={signupHandelSubmit} className="flex flex-wrap flex-col items-center" >
+                    <h2 className="">SignUp</h2>
+                    <input value={signupEmail} onChange={(e) => {
+                        setSignupEmail(e.target.value)
+                    }} className="border-black border-2 m-2 rounded-2xl w-2xs h-8.5 p-1" type="email" name="singnupName" id="singnupName" placeholder="email" autoComplete="email" required/>
+                    <input value={signupPassword} onChange={(e) => {
+                        setSignupPassword(e.target.value)
+                    }} className="border-black border-2 m-2 rounded-2xl w-2xs h-8.5 p-1" type="password" name="signupPassword" id="signupPassword" placeholder="password" autoComplete="new-password" required />
+                    <input value={signupMobileNo} onChange={(e) => {
+                        setSignupMobileNo(e.target.value)
+                    }} className="border-black border-2 m-2 rounded-2xl w-2xs h-8.5 p-1" type="text" name="signupContact" id="signupContact" placeholder="contact no" required />
+                    <button className="border-black border-2 rounded-2xl w-20 m-1 hover:bg-gray-200">SignUp</button>
+                </form>
 
-            <form onSubmit={signinHandelSubmit} className="flex flex-col justify-center gap-2">
-                <h2>SignIn</h2>
-                <input value={signinEmail} onChange={(e)=>{
-                    setSigninEmail(e.target.value)
-                }} className="border-2 rounded-md" type="email" name="signinName" id="signinName" placeholder="email" autoComplete="email" required/>
-                <input value={signinPassword} onChange={(e)=>{
-                    setSigninPassword(e.target.value)
-                }} className="border-2 rounded-md" type="password" name="signinPassword" id="signinPassword" placeholder="password" autoComplete="current-password" required/>
-                <button>SignIn</button>
-            </form>
+                <form onSubmit={signinHandelSubmit} className="flex flex-wrap flex-col items-center">
+                    <h2>SignIn</h2>
+                    <input value={signinEmail} onChange={(e)=>{
+                        setSigninEmail(e.target.value)
+                    }} className="border-black border-2 m-2 rounded-2xl w-2xs h-8.5 p-1" type="email" name="signinName" id="signinName" placeholder="email" autoComplete="email" required/>
+                    <input value={signinPassword} onChange={(e)=>{
+                        setSigninPassword(e.target.value)
+                    }} className="border-black border-2 m-2 rounded-2xl w-2xs h-8.5 p-1" type="password" name="signinPassword" id="signinPassword" placeholder="password" autoComplete="current-password" required/>
+                    <button className="border-black border-2 rounded-2xl w-20 m-1 hover:bg-gray-200">SignIn</button>
+                </form>
+            </div>
         </div>
+        
     )
 }
