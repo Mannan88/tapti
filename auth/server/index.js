@@ -5,9 +5,9 @@ import pg from 'pg';
 import dotenv from 'dotenv';
 import session from 'express-session';
 import passport from 'passport';
-import passportSession from 'passport-session';
-import { Strategy } from 'passport-local';
 import cors from 'cors';
+import dialogflow from '@google-cloud/dialogflow';
+import { v4 as uuidv4 } from 'uuid';
 
 
 dotenv.config();
@@ -47,6 +47,37 @@ const db = new pg.Client({
 });
 
 db.connect();
+
+const projectId = process.env.DIALOGFLOW_PROJECT_ID
+const sessionClient = new dialogflow.SessionsClient({
+  keyFilename: process.env.GOOGLE_APPLICATION_CREDENTIALS
+});
+
+app.post("/chat", async (req, res) => {
+  const { message } = req.body;
+  const sessionId = uuidv4(); // unique session per chat
+  const sessionPath = sessionClient.projectAgentSessionPath(projectId, sessionId);
+
+  const request = {
+    session: sessionPath,
+    queryInput: {
+      text: {
+        text: message,
+        languageCode: "en-US",
+      },
+    },
+  };
+
+  try {
+    const [response] = await sessionClient.detectIntent(request);
+    const reply = response.queryResult.fulfillmentText;
+    res.json({ reply });
+  } catch (error) {
+    console.error("Dialogflow error:", error);
+    res.status(500).json({ error: "Error connecting to Dialogflow" });
+  }
+});
+
 
 app.post("/signup", async (req, res) => {
     const { name, password, contact } = req.body;
