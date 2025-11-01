@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ChatBot from "./ChatBot";
 
 export default function HomePage() {
   const [sosMessage, setSosMessage] = useState("");
@@ -8,6 +9,7 @@ export default function HomePage() {
   const [confirmSOS, setConfirmSOS] = useState(false);
   const [toast, setToast] = useState("");
 
+  // 🔹 Load saved SOS data from localStorage
   useEffect(() => {
     const savedMsg = localStorage.getItem("sosMessage");
     const savedC1 = localStorage.getItem("contact1");
@@ -28,7 +30,6 @@ export default function HomePage() {
 
   return (
     <div className="h-screen w-screen bg-gradient-to-br from-blue-200 via-indigo-200 to-teal-200 flex flex-col relative overflow-hidden">
-      
       {/* HEADER */}
       <nav className="p-5 backdrop-blur-lg bg-white/20 shadow-md flex justify-between items-center">
         <h1 className="text-2xl font-bold text-gray-700">SOS Safety Center</h1>
@@ -40,25 +41,12 @@ export default function HomePage() {
         </button>
       </nav>
 
-      {/* CHATBOT PLACEHOLDER */}
-      <div className="flex-grow flex flex-col p-5">
-        <div className="flex-grow rounded-2xl bg-white/40 backdrop-blur-xl shadow-md p-5 overflow-y-auto">
-          <p className="text-gray-600 italic text-center mt-10">
-            🤖 Chatbot coming soon… (will assist you in emergencies)
-          </p>
-        </div>
-
-        {/* DISABLED INPUT */}
-        <div className="w-full mt-4">
-          <input
-            disabled
-            placeholder="Chatbot unavailable — coming soon"
-            className="w-full bg-white/60 backdrop-blur-xl p-3 rounded-xl text-gray-400 border border-gray-300"
-          />
-        </div>
+      {/* MAIN CONTENT */}
+      <div className="flex-grow p-5">
+        <ChatBot />
       </div>
 
-      {/* SLIDE-OVER SETTINGS */}
+      {/* SETTINGS PANEL */}
       {settingsOpen && (
         <div className="absolute top-0 right-0 w-80 h-full bg-white shadow-2xl p-5 animate-slide-left">
           <h2 className="text-xl font-bold mb-5 text-gray-700">Settings</h2>
@@ -105,8 +93,12 @@ export default function HomePage() {
         <div className="absolute inset-0 flex justify-center items-center bg-black/50">
           <div className="bg-white rounded-2xl p-6 w-80 text-center">
             <h2 className="text-lg font-bold mb-3">Send SOS?</h2>
-            <p className="text-sm text-gray-600 mb-5">Your emergency message will be sent.</p>
-            <button className="w-full py-2 bg-red-500 text-white rounded-xl mb-2">YES, SEND</button>
+            <p className="text-sm text-gray-600 mb-5">
+              Your emergency message will be sent.
+            </p>
+            <button className="w-full py-2 bg-red-500 text-white rounded-xl mb-2">
+              YES, SEND
+            </button>
             <button
               onClick={() => setConfirmSOS(false)}
               className="w-full py-2 bg-gray-300 rounded-xl"
