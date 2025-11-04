@@ -28,7 +28,12 @@ export default function LoginForm() {
                 return;
             }
             login(res.data.user);
-            navigate("/home");
+            if(res.data.user.role=='user'){
+                navigate("/home");
+            } else if(res.data.user.role=='authority') {
+                navigate("/admin");
+            }
+            
         } catch {
             alert("SignIn Failed!");
         }
@@ -43,7 +48,11 @@ export default function LoginForm() {
                 contact: signupMobileNo,
             });
             login(res.data.user);
-            navigate("/home");
+            if(res.data.user.role=='user'){
+                navigate("/home");
+            } else if(res.data.user.role=='authority') {
+                navigate("/admin");
+            }
         } catch {
             alert("SignUp Failed!");
         }

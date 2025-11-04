@@ -134,7 +134,8 @@ app.post('/signin', async (req, res) => {
                 req.session.user = {
                     id: result.rows[0].id,
                     email: result.rows[0].email,
-                    mobile_no: result.rows[0].mobile_no
+                    mobile_no: result.rows[0].mobile_no,
+                    role: result.rows[0].role
                 };
                 req.session.save(err => {
                     if (err) {
